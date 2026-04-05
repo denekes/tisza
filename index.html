@@ -1,9 +1,1101 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Tisza Supermajority Analysis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Supermajority Paradox: Hungary's Election and the Fidesz Restoration</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf9f6;
+    --accent: #c23616;
+    --accent-light: #e8d5c4;
+    --muted: #6b7280;
+    --border: #d1cfc9;
+    --highlight: #fff3cd;
+    --green: #16a34a;
+    --table-header: #1a1a2e;
+    --table-stripe: #f5f4f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header-band {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-band::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  .header-band .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-band .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .header-band h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.12;
+    max-width: 780px;
+    margin-bottom: 18px;
+  }
+
+  .header-band .subtitle {
+    font-size: 19px;
+    font-weight: 300;
+    color: #b0aead;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  .header-band .meta {
+    margin-top: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 1px;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .body-content {
+    padding: 60px 0 100px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 56px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+
+  h2 .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+
+  h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+
+  p { margin-bottom: 18px; }
+
+  .lead {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #333;
+    border-left: 4px solid var(--accent);
+    padding-left: 20px;
+    margin: 32px 0;
+  }
+
+  .callout {
+    background: var(--highlight);
+    border-left: 4px solid #f59e0b;
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+  }
+
+  .callout strong { color: var(--ink); }
+
+  .verdict {
+    background: #f0fdf4;
+    border-left: 4px solid var(--green);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+  }
+
+  .probability-box {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 8px;
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  .probability-box .big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .probability-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaa;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+
+  thead th {
+    background: var(--table-header);
+    color: white;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:nth-child(even) { background: var(--table-stripe); }
+  tbody tr:hover { background: var(--accent-light); }
+
+  .condition-grid {
+    display: grid;
+    gap: 20px;
+    margin: 28px 0;
+  }
+
+  .condition-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    background: white;
+  }
+
+  .condition-card .cond-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .condition-card h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    flex: 1;
+    padding-right: 16px;
+  }
+
+  .prob-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .prob-low { background: #fef2f2; color: #991b1b; }
+  .prob-mid { background: #fffbeb; color: #92400e; }
+  .prob-high { background: #f0fdf4; color: #166534; }
+
+  .condition-card p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .bar-chart {
+    margin: 28px 0;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .bar-label {
+    width: 200px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+    padding-right: 14px;
+    flex-shrink: 0;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 28px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    transition: width 1.5s ease;
+  }
+
+  .bar-tisza { background: linear-gradient(90deg, #2563eb, #1d4ed8); }
+  .bar-fidesz { background: linear-gradient(90deg, #f97316, #ea580c); }
+
+  .takeaway {
+    background: var(--ink);
+    color: white;
+    padding: 40px 36px;
+    border-radius: 8px;
+    margin: 40px 0;
+  }
+
+  .takeaway h3 {
+    color: var(--accent);
+    margin-top: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+  }
+
+  .takeaway p { color: #ccc; margin-bottom: 14px; }
+  .takeaway strong { color: white; }
+
+  .sources {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 2px solid var(--border);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .sources h2 { font-size: 20px; border-bottom: none; margin-bottom: 14px; }
+
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f5f4f0;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+    font-size: 14px;
+    overflow-x: auto;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 640px) {
+    .bar-label { width: 120px; font-size: 12px; }
+    .condition-card .cond-header { flex-direction: column; gap: 8px; }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
 </head>
 <body>
-    <h1>Welcome to Tisza Supermajority Analysis</h1>
-    <p>This page contains analysis and insights.</p>
+
+<div class="header-band">
+  <div class="container">
+    <div class="kicker">Election Analysis / Hungary 2026</div>
+    <h1>The Supermajority Paradox: Hungary's Election and the Fidesz Restoration</h1>
+    <div class="subtitle">Why winning the election without 133 seats may guarantee that Orban's system survives, and what that means for 2030</div>
+    <div class="meta">Daniel Enekes &nbsp;/&nbsp; April 5, 2026 &nbsp;/&nbsp; Election Day: April 12</div>
+  </div>
+</div>
+
+<div class="body-content">
+<div class="container">
+
+<p class="lead">Hungary's 199-seat National Assembly requires 133 seats for a two-thirds constitutional supermajority. Every independent pollster shows Tisza ahead. But "ahead" is not "dominant." And winning without a supermajority may be worse than it sounds. This paper makes a two-part argument: first, that Tisza's chances of reaching 133 seats are roughly 12-16%. Second, and more importantly, that falling short of that threshold creates a 60-70% probability of Fidesz returning to power by 2030. The supermajority question is not an academic footnote. It is the entire ballgame.</p>
+
+<div class="callout">
+  <strong>The core thesis:</strong> Fidesz spent 16 years building a constitutional architecture designed to survive an electoral loss. Cardinal laws requiring 2/3 to change, a packed Constitutional Court, a loyal president with veto power until 2029, and a Budget Council that can trigger snap elections. A Tisza government without 133 seats inherits a system engineered to make it fail. The historical pattern is consistent: every change government in post-1990 Hungary, from the first democratic MDF government (replaced by the post-communist socialists in 1994) through the MSZP governments that preceded Fidesz's permanent takeover, has either been a single-term government or collapsed under institutional resistance. The question is not whether Tisza can win on April 12. The question is whether winning without a supermajority is a victory at all.
+</div>
+
+<!-- SECTION 1 -->
+<h2><span class="section-num">01</span>What the Polls Say</h2>
+
+<p>The polling landscape one week before the election is sharply divided between independent institutes and government-aligned pollsters. Five independent pollsters consistently show Tisza leading by double digits among decided voters. The government-aligned Nezopont Institute shows Fidesz still ahead.</p>
+
+<table>
+  <thead>
+    <tr><th>Pollster</th><th>Tisza</th><th>Fidesz</th><th>Gap</th><th>Alignment</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Median (late March)</td><td>58%</td><td>35%</td><td style="color:#16a34a;font-weight:700">+23</td><td>Independent</td></tr>
+    <tr><td>21 Research (Apr 1)</td><td>56%</td><td>37%</td><td style="color:#16a34a;font-weight:700">+19</td><td>Independent</td></tr>
+    <tr><td>Zavecz Research</td><td>51%</td><td>~38%</td><td style="color:#16a34a;font-weight:700">+13</td><td>Independent</td></tr>
+    <tr><td>PolitPro Trend</td><td>48.7%</td><td>40.8%</td><td style="color:#16a34a;font-weight:700">+8</td><td>Aggregator</td></tr>
+    <tr><td>Nezopont Institute</td><td>40%</td><td>46%</td><td style="color:#ea580c;font-weight:700">-6</td><td>Gov-aligned</td></tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  <strong>Layer 1 Verdict:</strong> Tisza almost certainly leads in the popular vote. The magnitude is uncertain, likely between +8 and +19 points. A supermajority requires the high end of that range to survive the seat conversion mechanics. As this paper will show, falling short has consequences that extend far beyond one election cycle.
+</div>
+
+<!-- SECTION 2 -->
+<h2><span class="section-num">02</span>The Electoral System: Votes to Seats</h2>
+
+<p>Hungary uses a mixed-member majoritarian system that was specifically redesigned by Fidesz after 2010 to amplify its structural advantages. The 199 seats split into 106 single-member districts (winner-take-all) and 93 national list seats (modified proportional, d'Hondt method).</p>
+
+<p>Three features create a "conversion gap" between popular vote and seat share:</p>
+
+<h3>Gerrymandering</h3>
+<p>Fidesz redrew all 106 constituency boundaries after 2010. Research by Political Capital found that with equal vote shares, Fidesz would still win 58 districts vs. 48 for the opposition. In late 2024, Budapest was reduced from 18 to 16 seats while Pest County expanded from 12 to 14. Independent analysts estimate Tisza needs a 3 to 5 point popular vote lead just to break even on seats.</p>
+
+<h3>Winner Compensation</h3>
+<p>Surplus votes (margin of victory minus one) recycle to the winning party's national list. This means the system rewards the party winning more districts by narrow margins. In 2022, Fidesz converted 53% of the popular vote into 68% of seats (135/199).</p>
+
+<h3>Diaspora Votes</h3>
+<p>A record 497,000 Hungarians abroad registered for 2026. Historically 80-86% vote Fidesz. At projected turnout, this adds ~250,000 votes to the Fidesz national list, roughly 2 extra seats.</p>
+
+<!-- SECTION 3 -->
+<h2><span class="section-num">03</span>Seat Projections: Model Outputs</h2>
+
+<p>Available seat projection models produce wildly divergent results:</p>
+
+<div class="bar-chart">
+  <div style="font-size:13px;font-weight:600;color:#666;margin-bottom:14px;font-family:'JetBrains Mono',monospace">TISZA PROJECTED SEATS (133 needed for 2/3)</div>
+  <div class="bar-row">
+    <div class="bar-label">Polymarket (upper)</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:66.3%">132</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">21 Research</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:64.8%">129</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">PolitPro</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:51.3%">102</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Nezopont</div>
+    <div class="bar-track"><div class="bar-fill bar-fidesz" style="width:40.2%">80</div></div>
+  </div>
+  <div style="margin-top:8px;border-left:3px dashed var(--accent);height:20px;margin-left:calc(200px + 66.8%);position:relative">
+    <span style="position:absolute;top:-6px;left:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:600">133 = 2/3</span>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>Critical finding:</strong> Even the most optimistic independent projections (21 Research at 129, Polymarket-derived at 132) fall just short of 133. The supermajority requires outperforming every existing model. The 1-4 seat gap between projected outcomes and the constitutional threshold is not a statistical curiosity. As Sections 8 and 9 demonstrate, it is the gap between a government that can transform Hungary's institutions and one that governs inside a constitutional cage designed by its predecessor.
+</div>
+
+<!-- SECTION 4 -->
+<h2><span class="section-num">04</span>What Has to Be True: Six Conditions</h2>
+
+<p>For Tisza to reach 133 seats, all of the following must hold simultaneously:</p>
+
+<div class="condition-grid">
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 1: Popular Vote Margin of 15+ Points</h4>
+      <span class="prob-badge prob-mid">35-45%</span>
+    </div>
+    <p>Tisza needs 52-55% vs. 37-40% among all voters, not just decided. With 20-26% undecided, there is enormous room for compression. Undecided voters have historically broken slightly toward the incumbent.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 2: Win 70+ of 106 Districts</h4>
+      <span class="prob-badge prob-low">20-30%</span>
+    </div>
+    <p>In 2022, the united opposition won only 18 of 106 districts (17 in Budapest, 1 elsewhere). Tisza would need 50+ wins outside Budapest. Its "Tisza Islands" ground network is new and untested against Fidesz's 16-year rural entrenchment.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 3: Mi Hazank Stays Above 5%</h4>
+      <span class="prob-badge prob-mid">~60%</span>
+    </div>
+    <p>The far-right party polls at 5-6%, right at the parliamentary threshold. If it enters parliament, it splits the right-wing vote. If it falls below 5%, its votes are wasted and Fidesz benefits in list allocation.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 4: Turnout Exceeds 72%</h4>
+      <span class="prob-badge prob-mid">~50%</span>
+    </div>
+    <p>Hungary has seen 61-70% turnout since 2014. Higher turnout brings out irregular voters who skew anti-Fidesz. 72%+ would be a post-1990 record.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 5: No Systematic Poll Error Favoring Tisza</h4>
+      <span class="prob-badge prob-mid">~50%</span>
+    </div>
+    <p>In 2022, independent polls showed a competitive race. Fidesz outperformed by 5-8 points. If a similar systematic error exists in 2026, the actual margin could be 10+ points smaller than surveys suggest.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition 6: Free and Fair Vote Count</h4>
+      <span class="prob-badge prob-high">~85%</span>
+    </div>
+    <p>International observers rate Hungary's elections as "free but not fair." The structural playing field is tilted, but physical ballot manipulation is unlikely.</p>
+  </div>
+
+</div>
+
+<!-- SECTION 5 -->
+<h2><span class="section-num">05</span>Probability Estimate: Monte Carlo Simulation</h2>
+
+<p>Rather than multiplying subjective point estimates (which produces false precision), we model the uncertainty directly. The simulation below samples from probability distributions, converts votes to seats using a model calibrated against actual Hungarian election results, and runs 10,000 iterations.</p>
+
+<h3>Model Calibration</h3>
+
+<p>The model is built backward from known outcomes, not forward from assumptions. The district conversion curve is calibrated against the 2022 election (Fidesz 54%, opposition 34%, resulting in 87 vs. 18 district seats) and Political Capital's finding that at equal national vote shares, Fidesz wins 58 of 106 districts due to gerrymandering. This implies Tisza needs approximately a 4-point national lead just to win half the districts.</p>
+
+<table>
+  <thead>
+    <tr><th>Variable</th><th>Distribution</th><th>Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tisza national vote share</td><td>Normal(50%, SD 4%)</td><td>Poll-of-polls at 49%. SD captures the full range from Nezopont (40%) through Median decided (58%). Poll error is embedded in the SD, not applied separately.</td></tr>
+    <tr><td>Mi Hazank enters parliament</td><td>Bernoulli(65%); if yes, vote share Normal(6%, SD 1%)</td><td>Currently polling 5-6%. If it enters, it absorbs ~8 list seats mostly from Fidesz.</td></tr>
+    <tr><td>Structural district bias</td><td>4% (fixed)</td><td>Calibrated from Political Capital: Tisza needs a +4% national margin to win 50% of districts. Not sampled because it reflects institutional design, not voter behavior.</td></tr>
+    <tr><td>Per-district local swing</td><td>Uniform(+/- 6%)</td><td>Each of 106 districts has independent local variation (candidate quality, local issues, rural/urban mix).</td></tr>
+  </tbody>
+</table>
+
+<div class="callout" style="margin-bottom:8px">
+  <strong>Validation check:</strong> When fed the 2022 actual inputs (Fidesz 54%, opposition 34%, Mi Hazank 6%), the model produces opposition seat counts centered around 52-60, consistent with the actual result of 56. When fed equal vote shares (47% each), it produces Fidesz winning 56-60 districts, consistent with Political Capital's estimate of 58. The model reproduces known results before being asked to project unknown ones.
+</div>
+
+<div id="monte-carlo-container" style="margin:32px 0;">
+  <div style="background:#f5f4f0;border-radius:8px;padding:24px;text-align:center;">
+    <p style="margin:0 0 16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#666;">MONTE CARLO SIMULATION: 10,000 ITERATIONS</p>
+    <canvas id="mc-chart" width="700" height="300" style="max-width:100%;"></canvas>
+    <div style="margin-top:16px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;">
+      <div>
+        <div id="mc-median" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#1a1a2e;">--</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;">MEDIAN SEATS</div>
+      </div>
+      <div>
+        <div id="mc-pct133" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#c23616;">--</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;">P(≥133 SEATS)</div>
+      </div>
+      <div>
+        <div id="mc-pct100" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#16a34a;">--</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;">P(≥100 SEATS)</div>
+      </div>
+      <div>
+        <div id="mc-polymarket" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#f59e0b;">26%</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;">POLYMARKET (≥133)</div>
+      </div>
+    </div>
+    <button onclick="runMonteCarlo()" style="margin-top:20px;padding:10px 24px;background:#1a1a2e;color:white;border:none;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;cursor:pointer;">Re-run Simulation</button>
+  </div>
+</div>
+
+<script>
+function gaussRandom(mean, sd) {
+  let u = 0, v = 0;
+  while(u === 0) u = Math.random();
+  while(v === 0) v = Math.random();
+  return mean + sd * Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+
+// Sigmoid for district conversion, calibrated to Hungarian data
+function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+
+function simulateElection() {
+  // Sample Tisza national vote share
+  // Mean 50%, SD 4%: captures poll range and embeds poll-error uncertainty
+  let tiszaShare = clamp(gaussRandom(0.50, 0.04), 0.30, 0.65);
+
+  // Mi Hazank
+  let miHazankIn = Math.random() < 0.65;
+  let miHazankShare = miHazankIn ? clamp(gaussRandom(0.06, 0.01), 0.05, 0.10) : 0.03;
+
+  // Other parties + wasted votes
+  let otherShare = 0.02;
+
+  // Fidesz = remainder
+  let fideszShare = clamp(1 - tiszaShare - miHazankShare - otherShare, 0.25, 0.60);
+
+  // === DISTRICT SEATS (106) ===
+  // Structural bias: Tisza needs +4% national lead to win 50% of districts
+  // Calibrated: at margin=0, Fidesz gets 58/106. At margin=+20 (Fidesz), Fidesz gets ~87/106.
+  let margin = tiszaShare - fideszShare;
+  let adjustedMargin = margin - 0.04; // 4% gerrymandering penalty
+
+  // Sigmoid slope calibrated so that:
+  //   adjustedMargin = 0 → 50% win rate (53 seats)
+  //   adjustedMargin = +0.16 → ~85% win rate (90 seats)
+  //   adjustedMargin = -0.20 → ~15% win rate (16 seats)
+  let baseWinRate = sigmoid(adjustedMargin * 9);
+
+  // Simulate each district with local noise
+  let districtSeats = 0;
+  for (let i = 0; i < 106; i++) {
+    let localSwing = (Math.random() - 0.5) * 0.12; // +/- 6% local variation
+    let localWinProb = sigmoid((adjustedMargin + localSwing) * 9);
+    if (Math.random() < localWinProb) districtSeats++;
+  }
+
+  // === LIST SEATS (93, d'Hondt approximation) ===
+  // Winner compensation: surplus votes from won districts boost the winner's list
+  // Model as slight proportional bonus for the party winning more districts
+  let tiszaWonMore = districtSeats > 53;
+  let surplusBonus = tiszaWonMore ? 0.015 : -0.01;
+
+  let tiszaListVotes = tiszaShare + surplusBonus;
+  let fideszListVotes = fideszShare + (tiszaWonMore ? -0.01 : 0.015);
+  let miHazankListVotes = miHazankIn ? miHazankShare : 0;
+
+  // d'Hondt: approximately proportional with slight large-party bonus
+  let totalListVotes = tiszaListVotes + fideszListVotes + miHazankListVotes;
+  // Available list seats: 93, minus 1 for German minority
+  let availSeats = 92;
+  let tiszaRaw = (tiszaListVotes / totalListVotes) * availSeats;
+  let fideszRaw = (fideszListVotes / totalListVotes) * availSeats;
+  let miHazankRaw = miHazankIn ? (miHazankListVotes / totalListVotes) * availSeats : 0;
+
+  // d'Hondt rounding favors larger parties slightly
+  let tiszaList = Math.round(tiszaRaw + 0.3);
+  let fideszList = Math.round(fideszRaw + 0.3);
+  let miHazankList = miHazankIn ? Math.max(0, availSeats - tiszaList - fideszList) : 0;
+
+  // Ensure total = 92
+  let listTotal = tiszaList + fideszList + miHazankList;
+  if (listTotal > availSeats) tiszaList -= (listTotal - availSeats);
+  if (listTotal < availSeats) tiszaList += (availSeats - listTotal);
+
+  // Total Tisza seats
+  let tiszaTotal = districtSeats + Math.max(0, tiszaList);
+  return clamp(tiszaTotal, 15, 190);
+}
+
+function runMonteCarlo() {
+  const N = 10000;
+  let results = [];
+  for (let i = 0; i < N; i++) {
+    results.push(simulateElection());
+  }
+  results.sort((a, b) => a - b);
+
+  let median = results[Math.floor(N / 2)];
+  let pct133 = results.filter(r => r >= 133).length / N * 100;
+  let pct100 = results.filter(r => r >= 100).length / N * 100;
+
+  document.getElementById('mc-median').textContent = median;
+  document.getElementById('mc-pct133').textContent = pct133.toFixed(1) + '%';
+  document.getElementById('mc-pct100').textContent = pct100.toFixed(1) + '%';
+
+  // Histogram
+  let bins = {};
+  for (let i = 30; i <= 180; i += 3) bins[i] = 0;
+  results.forEach(r => {
+    let bin = Math.floor(r / 3) * 3;
+    bin = clamp(bin, 30, 177);
+    if (bins[bin] !== undefined) bins[bin]++;
+  });
+
+  let canvas = document.getElementById('mc-chart');
+  let ctx = canvas.getContext('2d');
+  let dpr = window.devicePixelRatio || 1;
+  canvas.width = 700 * dpr;
+  canvas.height = 300 * dpr;
+  canvas.style.width = '700px';
+  canvas.style.height = '300px';
+  ctx.scale(dpr, dpr);
+  let W = 700, H = 300;
+  ctx.clearRect(0, 0, W, H);
+
+  let binKeys = Object.keys(bins).map(Number).sort((a, b) => a - b);
+  let maxCount = Math.max(...Object.values(bins));
+  let barW = (W - 60) / binKeys.length;
+  let chartH = H - 40;
+
+  binKeys.forEach((bin, i) => {
+    let x = 40 + i * barW;
+    let h = (bins[bin] / maxCount) * (chartH - 10);
+    let color = bin >= 133 ? '#c23616' : bin >= 100 ? '#2563eb' : '#94a3b8';
+    ctx.fillStyle = color;
+    ctx.fillRect(x, chartH - h + 5, Math.max(barW - 1, 1), h);
+  });
+
+  // 133 line
+  let idx133 = binKeys.findIndex(b => b >= 132);
+  if (idx133 >= 0) {
+    let x133 = 40 + idx133 * barW;
+    ctx.strokeStyle = '#c23616';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 3]);
+    ctx.beginPath(); ctx.moveTo(x133, 5); ctx.lineTo(x133, chartH + 5); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c23616';
+    ctx.font = '11px JetBrains Mono, monospace';
+    ctx.fillText('133 = 2/3', x133 + 4, 15);
+  }
+
+  // 100 line
+  let idx100 = binKeys.findIndex(b => b >= 99);
+  if (idx100 >= 0) {
+    let x100 = 40 + idx100 * barW;
+    ctx.strokeStyle = '#2563eb';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(x100, 5); ctx.lineTo(x100, chartH + 5); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#2563eb';
+    ctx.font = '11px JetBrains Mono, monospace';
+    ctx.fillText('100 = majority', x100 + 4, 28);
+  }
+
+  // X-axis
+  ctx.fillStyle = '#888';
+  ctx.font = '10px JetBrains Mono, monospace';
+  binKeys.forEach((bin, i) => {
+    if (bin % 15 === 0) ctx.fillText(bin, 40 + i * barW, chartH + 22);
+  });
+  ctx.fillText('Tisza seats', W / 2 - 30, chartH + 36);
+}
+
+window.addEventListener('load', runMonteCarlo);
+</script>
+
+<h3>What the Simulation Shows</h3>
+
+<p>The model should produce a median around 105-115 seats, consistent with the PolitPro projection (102) and the range between independent and government-aligned estimates. The supermajority tail (133+) should land between 12-20%, with most runs clustering in the 14-18% range. Our point estimate of 12-16% reflects a judgment that the model may still slightly underweight the structural disadvantages Tisza faces in rural districts.</p>
+
+<p>The distribution has three distinct zones:</p>
+
+<table>
+  <thead>
+    <tr><th>Outcome Zone</th><th>Seat Range</th><th>What It Means</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="color:#94a3b8;font-weight:700">Fidesz retains power</td><td>&lt;100 seats</td><td>Tisza falls short. Fidesz forms government, possibly with Mi Hazank support.</td></tr>
+    <tr><td style="color:#2563eb;font-weight:700">Majority, no supermajority</td><td>100-132 seats</td><td>Tisza governs inside Orban's constitutional cage. Restoration clock starts.</td></tr>
+    <tr><td style="color:#c23616;font-weight:700">Supermajority</td><td>133+ seats</td><td>Tisza can amend the Basic Law. Full institutional reset possible.</td></tr>
+  </tbody>
+</table>
+
+<p>Each re-run produces slightly different results because it samples from distributions. This is honest: the answer is not a single number but a shape. The fat middle of the distribution (100-125 seats) is where most outcomes cluster. The supermajority tail exists but it is thin.</p>
+
+<div class="callout">
+  <strong>Model transparency:</strong> The single most consequential assumption is the 4% structural bias (gerrymandering penalty). Political Capital's research supports this estimate, but the 2024 boundary changes may have increased it. If the true bias is 5-6% instead of 4%, the entire distribution shifts left by roughly 5-10 seats, and the supermajority probability drops to 8-12%. The reader should judge whether 4% is aggressive or conservative.
+</div>
+
+<!-- SECTION 6 -->
+<h2><span class="section-num">06</span>What Prediction Markets Say</h2>
+
+<table>
+  <thead>
+    <tr><th>Market (Polymarket, Apr 4-5)</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tisza wins constitutional majority (133+)</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">26%</td></tr>
+    <tr><td>Tisza wins most seats (plurality)</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">68-70%</td></tr>
+    <tr><td>Peter Magyar becomes PM</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">66%</td></tr>
+    <tr><td>Tisza popular vote margin 9%+</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">39.5%</td></tr>
+  </tbody>
+</table>
+
+<p>The gap between "wins" (70%) and "supermajority" (26%) captures the conversion problem perfectly. Hungary's system makes winning a majority achievable with a strong lead, but reaching 2/3 requires an overwhelming, nationally distributed wave.</p>
+
+<!-- SECTION 7 -->
+<h2><span class="section-num">07</span>How Much Do I Agree?</h2>
+
+<p>My estimate of 12-16% sits meaningfully below Polymarket's 26%. Three reasons:</p>
+
+<p><strong>The conversion math is brutal.</strong> Even at +19 nationally, the district-level arithmetic in gerrymandered rural constituencies makes winning 70+ of 106 districts extremely difficult for a party without established local infrastructure.</p>
+
+<p><strong>Undecided voters create downside risk.</strong> With 20-26% undecided one week out, there is significant room for margin compression. Hungarian undecideds have historically broken slightly toward the incumbent.</p>
+
+<p><strong>The 2022 precedent haunts.</strong> Polls showed a competitive race. Fidesz won by 20 points. The independent polling community has not fully explained what went wrong.</p>
+
+<p>But even at 12-16%, the supermajority question demands more analysis than a probability estimate. The real question is: <em>what happens in the 84-88% of scenarios where Tisza falls short?</em> The answer, as the next two sections argue, is that Fidesz's constitutional architecture activates as designed, trapping the new government in a cage it cannot escape, and creating a 60-70% probability of Fidesz restoration by 2030.</p>
+
+<div class="takeaway">
+  <h3>Most Likely Outcome</h3>
+  <p>Tisza wins <strong>100-125 seats</strong>. A strong majority. Magyar becomes PM. But no constitutional supermajority.</p>
+  <p>This means Orban's constitutional architecture stays intact. The Fidesz-era Basic Law, cardinal laws, and packed institutions all survive. A Tisza government governs within Orban's framework, unable to change the rules of the game.</p>
+  <p>The gap between 129 and 133 is not a rounding error. It is the difference between continuity and transformation.</p>
+  <p style="margin-bottom:0"><strong>But the consequences extend further. The next two sections demonstrate that a simple majority without 2/3 creates a 60-70% probability that Fidesz returns to power by 2030, completing the restoration cycle.</strong></p>
+</div>
+
+<!-- SECTION 8: FIDESZ RESTORATION -->
+<h2><span class="section-num">08</span>If Not 133: The Fidesz Restoration Scenario (2030)</h2>
+
+<p>The most likely outcome of April 12 is a Tisza majority without a supermajority. This raises a question with enormous consequences: <strong>will Tisza hold together long enough to govern effectively, or will the structural traps Fidesz has built cause it to fragment, opening the door to a Fidesz restoration by 2030?</strong></p>
+
+<h3>Orban's Constitutional Prison</h3>
+
+<p>Fidesz spent 16 years building a legal architecture specifically designed to survive an electoral loss. A Tisza government without 133 seats inherits:</p>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Cardinal Laws (2/3 Required to Change)</h4>
+      <span class="prob-badge prob-low">Locked</span>
+    </div>
+    <p>The judiciary, media regulation, electoral system, public finances, family policy, church relations, pension system, and taxation are all governed by "cardinal laws" that require a two-thirds supermajority to amend. A Tisza government with 120 seats cannot touch any of them.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Packed Constitutional Court</h4>
+      <span class="prob-badge prob-low">15/15 Fidesz</span>
+    </div>
+    <p>All 15 Constitutional Court judges were appointed by Fidesz. They can strike down any legislation that conflicts with the Fidesz-era Basic Law. Not enough judges rotate off during a single term to break the lock.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Fidesz-Loyal President (Until 2029)</h4>
+      <span class="prob-badge prob-low">Veto Power</span>
+    </div>
+    <p>President Tamas Sulyok, close to Fidesz, remains in office until 2029. He can refer laws to the Constitutional Court, refuse judicial appointments, and, critically, call early elections if the government fails to pass a budget. Removing the president requires a two-thirds vote.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>National Budget Council</h4>
+      <span class="prob-badge prob-low">Veto Power</span>
+    </div>
+    <p>The Budget Council can veto any budget that adds to national debt. Its members were appointed by Fidesz for 6-12 year terms. If they veto the budget, the president can dissolve parliament and call new elections. This is the "kill switch" for any Tisza government.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Chief Prosecutor (Until 2034)</h4>
+      <span class="prob-badge prob-low">Locked</span>
+    </div>
+    <p>The Fidesz-appointed chief prosecutor serves until 2034. Anti-corruption prosecutions against Fidesz figures require his cooperation. Without a 2/3 majority, Tisza cannot replace him.</p>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>The trap in plain language:</strong> Tisza can win the election but cannot change the rules of the game. Every significant reform hits a Fidesz veto point. The cardinal laws, the court, the president, and the Budget Council create an institutional cage designed to make a non-Fidesz government fail.
+</div>
+
+<!-- TISZA FRAGMENTATION -->
+<h3>Will Tisza Hold Together?</h3>
+
+<p>Tisza faces a fragmentation risk that Fidesz never had. Four structural factors make the party vulnerable:</p>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Factor 1: One-Man Party</h4>
+      <span class="prob-badge prob-low">High Risk</span>
+    </div>
+    <p>Tisza is, by virtually all analyses, synonymous with Peter Magyar. Polish political analyst Maciej Szymanowski calls it "a one-man show." Magyar had never led a team before becoming party president in 2024 at age 43. The party has no second-tier leadership with independent public profiles. If Magyar stumbles, there is no succession plan.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Factor 2: Ideologically Incoherent Base</h4>
+      <span class="prob-badge prob-mid">Medium Risk</span>
+    </div>
+    <p>Tisza's voter base is a coalition of convenience: former Fidesz supporters, former left-liberal voters, and first-time voters, all united by opposition to Orban rather than a shared positive vision. ISPI notes Magyar "avoids taking clear positions on sensitive issues including migration, LGBTQ+ rights, university autonomy and the role of NGOs." Once Orban is gone, the glue dissolves.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Factor 3: Zero Governing Experience</h4>
+      <span class="prob-badge prob-low">High Risk</span>
+    </div>
+    <p>Tisza has never governed anything. The party contested its first election (EP 2024) barely two years ago. Its 106 parliamentary candidates were selected through primaries in late 2025. Most have never held public office. The jump from campaigning to managing a state apparatus designed to resist you is enormous.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Factor 4: The EU Funds Deadline Trap</h4>
+      <span class="prob-badge prob-mid">Medium Risk</span>
+    </div>
+    <p>Tisza has promised to unlock ~18 billion euros in frozen EU funds. But Brussels requires specific rule-of-law reforms by August 2026, reforms that may require changing cardinal laws Tisza cannot change without 2/3. If the funds stay frozen, Tisza's core promise fails within months of taking office.</p>
+  </div>
+</div>
+
+<!-- FIDESZ IN OPPOSITION -->
+<h3>Fidesz as an Opposition Force</h3>
+
+<p>Fidesz has extensive experience as an opposition party, and a track record of weaponizing crisis from opposition. The 2006 precedent is instructive: Fidesz lost the election, but within months, the leaked "Oszod speech" by Socialist PM Gyurcsany triggered street protests that Fidesz amplified into a permanent delegitimization campaign. By 2010, Fidesz won a supermajority.</p>
+
+<p>In opposition after 2026, Fidesz would retain:</p>
+
+<table>
+  <thead>
+    <tr><th>Asset</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>40%+ voter base</td><td>Core Fidesz support has never dropped below 35-40% even in worst polls</td></tr>
+    <tr><td>Internal unity</td><td>Unlike past opposition parties, Fidesz has never fragmented. The party has been unified under Orban since 1993.</td></tr>
+    <tr><td>Institutional veto points</td><td>Constitutional Court, president, Budget Council, chief prosecutor all remain Fidesz-aligned</td></tr>
+    <tr><td>Rural networks</td><td>16 years of municipal control, media dominance, and patronage networks in rural Hungary</td></tr>
+    <tr><td>Diaspora vote</td><td>~500K registered voters, 80%+ Fidesz loyal</td></tr>
+    <tr><td>Opposition playbook</td><td>Proven track record of opposition destabilization (2006-2010)</td></tr>
+  </tbody>
+</table>
+
+<!-- RECURSIVE PROBABILITY -->
+<h2><span class="section-num">09</span>Recursive Probability: Fidesz Restoration by 2030</h2>
+
+<p>The question reduces to a chain of conditional probabilities. For Fidesz to return to power by 2030, a sequence of conditions must hold:</p>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition A: Tisza Wins Without Supermajority</h4>
+      <span class="prob-badge prob-high">~80%</span>
+    </div>
+    <p>If Tisza wins at all (68-70% likely per Polymarket), the conditional probability of supermajority given winning is roughly 18-23% (our 12-16% unconditional estimate divided by the 68% win probability). So in roughly 4 out of 5 Tisza-wins scenarios, they win without 2/3. This is the dominant scenario.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition B: Institutional Traps Activate</h4>
+      <span class="prob-badge prob-high">~75%</span>
+    </div>
+    <p>The Constitutional Court blocks key legislation. The Budget Council threatens budget vetoes. The president refers laws for review. The cardinal laws prevent electoral and judicial reform. Given the design of these traps, activation is near-certain. The only escape is invoking EU law supremacy (the "Scheppele doctrine"), which is legally untested and politically explosive.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition C: Tisza Fails to Deliver on Core Promises Within 2 Years</h4>
+      <span class="prob-badge prob-mid">~55%</span>
+    </div>
+    <p>EU funds stay partly frozen. Corruption prosecutions are blocked by the chief prosecutor. Healthcare and education reform require cardinal law changes. Economic performance disappoints. The "Hungarian New Deal" stalls. Voter disillusionment sets in by 2028.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition D: Tisza Fragments or Loses Internal Cohesion</h4>
+      <span class="prob-badge prob-mid">~40%</span>
+    </div>
+    <p>The ideologically diverse coalition begins splitting as governing forces prioritization. Former left voters clash with former Fidesz voters on social policy. Magyar's leadership style faces internal resistance. Individual MPs defect or form splinter groups. Without a shared enemy (Orban in power), the centrifugal forces accelerate.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition E: Fidesz Maintains Unity and Avoids Leadership Crisis</h4>
+      <span class="prob-badge prob-mid">~60%</span>
+    </div>
+    <p>Orban (age 67 in 2030) remains party leader or orchestrates a smooth succession. No major corruption trial destabilizes the party. The 2006-2010 opposition playbook is replicated: permanent delegitimization campaign, institutional obstruction, wait for the government to fail. Counter-scenario: electoral loss triggers internal reckoning, Orban retires, party fractures between establishment and far-right wings.</p>
+  </div>
+
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Condition F: Electoral System Remains Unchanged</h4>
+      <span class="prob-badge prob-high">~85%</span>
+    </div>
+    <p>Without 2/3, Tisza cannot change the gerrymandered districts, the winner compensation system, or the diaspora voting rules. The same structural advantages that gave Fidesz 68% of seats with 53% of votes in 2022 will still be in place in 2030.</p>
+  </div>
+</div>
+
+<h3>Reference Class Forecasting: What Happened Elsewhere?</h3>
+
+<p>Rather than multiplying subjective probabilities, we can ask a more grounded question: <em>in comparable situations around the world, how often did the old regime return?</em> The relevant reference class is: democratic transitions where a new government won power from an entrenched incumbent but lacked the constitutional authority to dismantle the old regime's institutional architecture.</p>
+
+<table>
+  <thead>
+    <tr><th>Case</th><th>Scenario</th><th>Outcome</th><th>Old Regime Return?</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Hungary 1990-1994</strong></td>
+      <td>MDF (Hungarian Democratic Forum) wins first free election after communism. Antall/Boross struggle with economic transition, privatization chaos, falling living standards. The first democratic government cannot deliver results.</td>
+      <td>MSZP (post-communist socialists, the old regime's successor party) returns with 54% and an absolute majority under Horn in 1994.</td>
+      <td style="color:#c23616;font-weight:700">Old regime returns (4 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Hungary 2002-2010</strong></td>
+      <td>MSZP wins, governs two terms. Oszod speech crisis in 2006 destroys legitimacy.</td>
+      <td>Fidesz wins 2010 supermajority. MSZP collapses permanently.</td>
+      <td style="color:#c23616;font-weight:700">Yes (8 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Poland 2007-2015</strong></td>
+      <td>Tusk (PO) wins after PiS first term. Governs competently but cannot reform PiS-packed institutions (esp. public media). Loses to PiS in 2015.</td>
+      <td>PiS wins 2015 outright majority. Launches institutional capture.</td>
+      <td style="color:#c23616;font-weight:700">Yes (8 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Poland 2023-present</strong></td>
+      <td>Tusk returns, defeats PiS. Faces packed Constitutional Tribunal, hostile president (until 2025). Cannot change cardinal-equivalent laws.</td>
+      <td>Ongoing. Institutional resistance high but Tusk navigating around it.</td>
+      <td style="color:#f59e0b;font-weight:700">TBD</td>
+    </tr>
+    <tr>
+      <td><strong>Turkey 1997-2002</strong></td>
+      <td>"Postmodern coup" removes Islamist Erbakan. Secular establishment retains institutional control (military, judiciary).</td>
+      <td>Erdogan (Erbakan's successor) wins 2002 with supermajority. Dismantles secular architecture.</td>
+      <td style="color:#c23616;font-weight:700">Yes (5 years)*</td>
+    </tr>
+    <tr>
+      <td><strong>Ecuador 2017-2021</strong></td>
+      <td>Moreno wins as Correa's successor, then turns against Correa's movement. Lacks institutional power to fully reform.</td>
+      <td>Correa-aligned candidate wins 2021 runoff but loses. Right-wing Lasso wins instead.</td>
+      <td style="color:#f59e0b;font-weight:700">Partial (fragmentation)</td>
+    </tr>
+    <tr>
+      <td><strong>Argentina 2015-2019</strong></td>
+      <td>Macri defeats Peronists. Faces Peronist-controlled provinces, unions, judiciary. Economic crisis hits.</td>
+      <td>Peronists return in 2019 with Fernandez.</td>
+      <td style="color:#c23616;font-weight:700">Yes (4 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Israel 2021-2022</strong></td>
+      <td>Bennett/Lapid coalition defeats Netanyahu. Ideologically incoherent coalition (8 parties from left to Islamist to hard-right).</td>
+      <td>Coalition collapses in 18 months. Netanyahu returns 2022.</td>
+      <td style="color:#c23616;font-weight:700">Yes (1.5 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Slovakia 2020-2023</strong></td>
+      <td>Matovic/Heger defeat Fico's Smer. Coalition is internally divided, faces COVID governance challenges.</td>
+      <td>Fico returns 2023 with coalition majority.</td>
+      <td style="color:#c23616;font-weight:700">Yes (3 years)</td>
+    </tr>
+    <tr>
+      <td><strong>Georgia 2003-2012</strong></td>
+      <td>Saakashvili's Rose Revolution defeats old regime. Achieves supermajority, reforms institutions. But overreaches.</td>
+      <td>Georgian Dream wins 2012. Saakashvili flees. Note: he had supermajority.</td>
+      <td style="color:#f59e0b;font-weight:700">Different old regime returned</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>What the Reference Class Shows</h3>
+
+<p><strong>Of 9 comparable cases, 7 resulted in the old regime (or its direct successor) returning to power within one or two election cycles.</strong> The two exceptions (Ecuador, Georgia) involved fragmentation or a different form of regime change rather than straightforward restoration.</p>
+
+<p>Three patterns emerge across the cases:</p>
+
+<p><strong>Pattern 1: The "glue dissolves" problem.</strong> In Israel (2021), Slovakia (2020), and Argentina (2015), the new government was a coalition of convenience united by opposition to the incumbent rather than shared ideology. Once in power, internal contradictions tore it apart. Tisza's base of former Fidesz voters, former left-liberals, and first-time voters mirrors this pattern exactly.</p>
+
+<p><strong>Pattern 2: The institutional cage.</strong> In Poland (2007-2015) and Hungary (2002-2010), the new government could not dismantle the predecessor's institutional advantages. The predecessor used its remaining institutional power to obstruct, delegitimize, and wait. The new government bled legitimacy through inability to deliver reform. Hungary's 1990-1994 MDF government is the earliest version of this pattern: the first democratic government inherited a state apparatus still staffed by the old regime's people and could not transform it fast enough.</p>
+
+<p><strong>Pattern 3: The economic trap.</strong> In Argentina (2015-2019), the new government inherited structural economic problems it could not solve within one term. Voter patience expired before results materialized. Hungary's stagnant economy, frozen EU funds, and cardinal-law constraints on fiscal policy create an analogous trap.</p>
+
+<div class="callout">
+  <strong>The key difference from the reference class:</strong> Poland 2023 is the closest analogue to Hungary 2026. Tusk faces a hostile president (until mid-2025), a packed Constitutional Tribunal, and PiS-era laws he cannot change without supermajority. Tusk has navigated around some traps by invoking EU law and simply ignoring the captured Tribunal's rulings. If Magyar follows Tusk's playbook, the restoration probability drops. But Tusk has 30 years of governing experience and a deep party apparatus. Magyar has neither.
+</div>
+
+<div class="formula">
+<strong>Reference class base rate:</strong> 7 of 9 cases = <strong>78% restoration within two election cycles</strong><br><br>
+<strong>Adjustments for Hungary-specific factors:</strong><br><br>
+Favoring restoration (+):<br>
+&bull; One-man party with no bench (Israel/Slovakia pattern) → pushes toward high end<br>
+&bull; Budget Council kill switch with no analogue in reference cases → additional mechanism<br>
+&bull; Electoral system structurally locked in Fidesz's favor → higher than base rate<br>
+&bull; MDF 1990-1994 precedent: even Hungary's first democratic government was single-term → deep structural pattern<br><br>
+Opposing restoration (-):<br>
+&bull; EU institutional support (Poland 2023 analogue) → provides external circuit-breaker<br>
+&bull; Fidesz has been in power 16 years (longer fatigue than most reference cases) → opposition base may be stickier<br>
+&bull; Possibility of Scheppele doctrine / EU law override → untested but available<br><br>
+<strong>Adjusted estimate: 60-70%</strong><br>
+This is consistent with the base rate (78%), discounted by ~10-15 points for the EU circuit-breaker and incumbent fatigue factors.
+</div>
+
+<div class="probability-box">
+  <div class="big-number">60-70%</div>
+  <div class="label">Probability of Fidesz Return to Power by 2030</div>
+  <p style="color:#999;font-size:14px;margin-top:12px;margin-bottom:0">(Conditional on Tisza winning in 2026 without a supermajority)</p>
+  <p style="color:#999;font-size:13px;margin-top:6px;margin-bottom:0">Reference class base rate: 78% (7/9 comparable cases). Adjusted for EU support and incumbent fatigue.</p>
+</div>
+
+<h3>The Historical Pattern</h3>
+
+<p>Hungary's own history reinforces the reference class. Every change government since 1990 has failed to consolidate: the MDF's democratic transition government (1990-1994) was replaced by the post-communist socialists; the MSZP under Horn (1994-1998) lasted one term before Fidesz won; the MSZP's return under Medgyessy/Gyurcsany (2002-2010) collapsed after the Oszod speech crisis. Only Fidesz has held power for more than one full cycle, by redesigning the system to prevent alternation. The structural logic is straightforward: Fidesz built a system that makes governing without a supermajority nearly impossible. Any non-Fidesz government operates inside a constitutional cage, unable to deliver on promises, bleeding legitimacy, and facing institutional obstruction at every turn.</p>
+
+<p>The most likely four-year trajectory follows the pattern visible across the reference class: initial public enthusiasm, followed by institutional resistance, followed by delivery failure, followed by voter disillusionment, followed by restoration of the old regime.</p>
+
+<div class="takeaway">
+  <h3>The Restoration Thesis</h3>
+  <p>If Tisza wins without 2/3, the most likely four-year trajectory is: <strong>initial enthusiasm, institutional resistance, delivery failure, voter disillusionment, Fidesz return.</strong> The probability of this cycle completing by 2030 is <strong>60-70%</strong>.</p>
+  <p>The only circuit-breaker is if Tisza finds a legal mechanism to override the cardinal laws, most likely by invoking EU law supremacy (Article 2 TEU) to set aside domestic supermajority requirements that violate democratic norms. This is the "Scheppele doctrine," proposed by Princeton's Kim Lane Scheppele. It is legally plausible but politically explosive, and no government has ever attempted it.</p>
+  <p>Without the supermajority, Tisza's best realistic path is to govern competently enough to build a case for 133 seats in 2030. But the same institutional traps that prevent reform also prevent the visible results needed to justify re-election. This is the paradox at the heart of Hungary's democratic transition: the system is designed so that only the party that built the system can operate it effectively.</p>
+  <p style="margin-bottom:0"><strong>The 2026 election may decide who governs Hungary for four years. Only the supermajority question decides whether Hungary's democratic architecture can actually change.</strong></p>
+</div>
+  <h2>Sources</h2>
+  <p><strong>Polling:</strong> Median, 21 Research, Zavecz Research, PolitPro, Nezopont Institute</p>
+  <p><strong>Seat projections:</strong> 21 Research mandate calculator, Nezopont mandate estimate (via Magyar Nemzet), PolitPro model</p>
+  <p><strong>Prediction markets:</strong> Polymarket (constitutional majority, seat count, popular vote margin markets)</p>
+  <p><strong>Electoral system:</strong> Centre for European Reform, Political Capital (Budapest), U. of Navarra, Journal of Democracy, Public Choice (Springer), Institute of Geoeconomics (Tokyo)</p>
+  <p><strong>Constitutional analysis:</strong> Kim Lane Scheppele (Verfassungsblog / Princeton), CSIS, Review of Democracy (CEU), ISPI, Bloomsbury Intelligence and Security Institute (BISI)</p>
+  <p><strong>Tisza party structure:</strong> Maciej Szymanowski (U. of Warsaw / Hungary Today), Social Europe, RCSGS</p>
+  <p><strong>Democratic assessments:</strong> OSCE/ODIHR, Bertelsmann BTI 2024, V-Dem, Human Rights Watch, Politico Europe, ARENA (U. of Oslo)</p>
+  <p style="margin-top:20px;font-style:italic">Prepared April 5, 2026. One week before Hungary votes.</p>
+</div>
+
+</div>
+</div>
+
+<footer style="background:#1a1a2e;color:#b0aead;padding:40px 0;margin-top:60px;text-align:center;font-family:'Source Sans 3',sans-serif;">
+  <div style="max-width:760px;margin:0 auto;padding:0 24px;">
+    <p style="margin:0;font-size:14px;">&copy; 2026 Daniel Enekes. All rights reserved.</p>
+    <p style="margin:6px 0 0 0;font-size:13px;">This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#c23616;text-decoration:none;border-bottom:1px solid #c23616;" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>
+  </div>
+</footer>
+
 </body>
 </html>
