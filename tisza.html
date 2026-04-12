@@ -351,10 +351,63 @@
     table { font-size: 13px; }
     thead th, tbody td { padding: 8px 10px; }
   }
+
+  .lang-bar {
+    background: #111;
+    padding: 8px 0;
+    text-align: right;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .lang-bar .container { display: flex; justify-content: flex-end; gap: 4px; }
+  .lang-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .lang-btn:hover:not(.active) { border-color: #888; color: #ccc; }
+  .update-box { background: #fef3c7; border: 2px solid #d97706; border-left: 6px solid #d97706; padding: 24px 28px; margin: 32px 0; border-radius: 6px; }
+  .update-box .update-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #92400e; margin-bottom: 10px; font-weight: 700; }
+  .update-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 14px; color: #78350f; }
+  .update-box p { margin-bottom: 12px; font-size: 16px; }
+  .update-box table { margin: 16px 0; }
+  .update-box th, .update-box td { background: white; }
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <div class="container">
+    <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+    <button class="lang-btn" onclick="switchLang('hu')">HU</button>
+  </div>
+</div>
+
+<script>
+function switchLang(lang) {
+  document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+  document.getElementById('content-hu').style.display = lang === 'hu' ? 'block' : 'none';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick*="' + lang + '"]').classList.add('active');
+  document.documentElement.lang = lang;
+  window.scrollTo(0, 0);
+}
+</script>
+
+<div id="content-en">
 <div class="header-band">
   <div class="container">
     <div class="kicker">Election Analysis / Hungary 2026</div>
@@ -368,6 +421,70 @@
 <div class="container">
 
 <p class="lead">Hungary's 199-seat National Assembly requires 133 seats for a two-thirds constitutional supermajority. Every independent pollster shows Tisza ahead. But "ahead" is not "dominant." And winning without a supermajority may be worse than it sounds. This paper makes a two-part argument: first, that Tisza's chances of reaching 133 seats are roughly 12-16%. Second, and more importantly, that falling short of that threshold creates a 60-70% probability of Fidesz returning to power by 2030. The supermajority question is not an academic footnote. It is the entire ballgame.</p>
+
+<div class="update-box">
+  <div class="update-label">Update &nbsp;/&nbsp; April 8, 2026</div>
+  <h3>Medián's mandate projection has crossed 133</h3>
+  <p>Medián published its latest mandate projection today, based on an aggregated 5,000-person sample across five representative surveys. The result: <strong>Tisza 138-143, Fidesz 49-55, Mi Hazánk 5-6.</strong> Central estimate: Tisza 141, Fidesz 52. This projects a stable two-thirds Tisza victory. Medián is not measuring simple national preference; they have built a district-by-district model that accounts for the gerrymandered single-member district conversion math.</p>
+  <p>My April 5 analysis put the supermajority probability at 12-16%. <strong>That estimate now requires upward revision.</strong></p>
+  <table>
+    <thead>
+      <tr><th>Scenario</th><th>April 5</th><th>April 8 (updated)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Tisza supermajority (133+)</td><td>12-16%</td><td><strong>30-42%</strong></td></tr>
+      <tr><td>Tisza majority without supermajority</td><td>55-65%</td><td><strong>40-50%</strong></td></tr>
+      <tr><td>Fidesz retains majority</td><td>20-30%</td><td><strong>15-20%</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>External cross-check:</strong> Polymarket's "Tisza wins constitutional majority" market sits at 24% (essentially unchanged). The "Tisza wins most seats" market is at 72.5%. This 48-point gap shows traders accept a Tisza victory but remain skeptical that the seat math reaches 133. The truth is likely between Medián's implied 50%+ and Polymarket's 24%: my own estimate is now 30-42%.</p>
+  <p style="margin-bottom:0"><strong>What does this change about the core thesis?</strong> The restoration argument in Sections 8 and 9 is <em>conditional</em>: the 60-70% Fidesz return probability only applies if Tisza wins without a supermajority. If Tisza secures 141 seats (Medián scenario), the constitutional architecture becomes amendable and the reference class analysis becomes irrelevant. The structural logic of the analysis is unchanged. Only the probability weight of the scenario it describes has shrunk.</p>
+</div>
+
+<div class="update-box" style="background:#dcfce7;border-color:#16a34a;border-left-color:#16a34a;">
+  <div class="update-label" style="color:#14532d;">Update &nbsp;/&nbsp; April 12, 2026, 3:00 PM</div>
+  <h3 style="color:#14532d;">Record turnout: 66.01% by 3 PM</h3>
+  <p>On election day, turnout reached 66.01% by 3 PM. That is 13.26 points higher than at the same hour in 2022 (52.8%) and already exceeds the full-day 2002 all-time record (53.59%). Earlier data: 16.89% at 9 AM (2022: 10.31%), 37.98% at 11 AM (2022: 25.77%), 54.14% at 1 PM (2022: 40.01%).</p>
+  <p><strong>Final turnout projection (saturation curve model):</strong> Voting is regressive, not linear, like pressure releasing from a water tank. The 2022 Hungary data and global reference cases (Poland 2023, Turkey 2023) show 2-hour window yields decay at a 0.75-0.85 ratio. Front-loading is stronger here than in 2022, likely driven by fear of fraud.</p>
+  <table>
+    <thead><tr><th>Scenario</th><th>Final turnout</th><th>Probability</th></tr></thead>
+    <tbody>
+      <tr><td>Mild decay</td><td>82-85%</td><td>35%</td></tr>
+      <tr><td>Moderate decay</td><td>80-82%</td><td>30%</td></tr>
+      <tr><td>Strong decay</td><td>78-80%</td><td>15%</td></tr>
+      <tr><td>No decay (linear)</td><td>>85%</td><td>15%</td></tr>
+      <tr><td>Severe exhaustion</td><td>&lt;78%</td><td>5%</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Expected final turnout: 81-84%.</strong> Probability of 80%+: <strong>80%.</strong> This would exceed Hungary's post-1990 record by 8-11 points.</p>
+  <p style="margin-bottom:0"><strong>Impact on supermajority probability:</strong> High turnout structurally favors Tisza (marginal voters break against the incumbent after 16 years). Medián's 141-seat projection assumed ~72-74% turnout. Actual 81-84% is meaningfully above that. <strong>Updated supermajority probability: 45-58%</strong> (April 8 estimate: 30-42%). Polymarket will likely reprice this evening as exit poll data arrives.</p>
+</div>
+
+<div class="update-box" style="background:#dbeafe;border-color:#1d4ed8;border-left-color:#1d4ed8;">
+  <div class="update-label" style="color:#1e3a8a;">Update &nbsp;/&nbsp; April 12, 2026, 5:00 PM (NVI official)</div>
+  <h3 style="color:#1e3a8a;">Geographic turnout pattern is decisive: 10-point urban-rural gap</h3>
+  <p>Official county-level data from the National Election Office (NVI) at 17:00 reveals an unprecedented 10-point spread in turnout between urban/Tisza-leaning counties and rural Fidesz strongholds. National turnout: <strong>74.23% (5,587,935 votes).</strong></p>
+  <table>
+    <thead><tr><th>Region type</th><th>Counties</th><th>Turnout range</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tisza-leaning</strong></td><td>Győr-Moson-Sopron, Vas, Pest, Budapest, Veszprém, Fejér, Zala</td><td>75.59-78.19%</td></tr>
+      <tr><td>Mixed</td><td>Komárom-Esztergom, Csongrád-Csanád, Heves</td><td>73.08-74.36%</td></tr>
+      <tr><td><strong>Fidesz strongholds</strong></td><td>BAZ, SZSZB, Nógrád, JNSZ, Hajdú-Bihar</td><td>68.13-71.22%</td></tr>
+    </tbody>
+  </table>
+  <p><strong>The Fidesz eastern firewall collapsed.</strong> BAZ (479,606 eligible) at 68.13% and SZSZB (416,208 eligible) at 68.91% represent roughly 54,000 missing votes from Fidesz's core base versus national average. Meanwhile Budapest (77.18%) and Pest County (77.58%) combined produced ~70,000 votes above national average in Tisza territory.</p>
+  <p><strong>Implied popular vote (derived from turnout composition and Medián demographic splits): Tisza 56-57%, Fidesz 34-35%.</strong> This matches Medián's late-March poll almost exactly, confirming their 141-seat projection as a credible central estimate rather than an outlier.</p>
+  <table>
+    <thead><tr><th>Scenario</th><th>April 5</th><th>April 8</th><th>April 12, 3 PM</th><th>April 12, 5 PM</th></tr></thead>
+    <tbody>
+      <tr><td>Tisza supermajority (133+)</td><td>12-16%</td><td>30-42%</td><td>45-58%</td><td><strong>62-75%</strong></td></tr>
+      <tr><td>Tisza majority without supermajority</td><td>55-65%</td><td>40-50%</td><td>30-40%</td><td><strong>18-25%</strong></td></tr>
+      <tr><td>Fidesz retains majority</td><td>20-30%</td><td>15-20%</td><td>10-15%</td><td><strong>5-10%</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Most likely seat outcome: Tisza 140-155, Fidesz 40-55, Mi Hazánk 4-6.</strong> The restoration thesis in Sections 8-9 now applies to roughly 20-25% of the probability mass, down from 55-65% in the original paper. Most probability mass has shifted to the scenario where Tisza can dismantle the constitutional architecture.</p>
+  <p style="margin-bottom:0"><strong>Falsification markers for tonight:</strong> First Budapest districts typically report between 20:00-20:30. If Budapest 3, Pest 2, and Pest 5 show Tisza margins above 25 points, the supermajority is confirmed. If margins compress to 15-20 points, revise back toward coin flip. Diaspora vote (historically ~85% Fidesz) will be counted through April 18 and could swing 1-2 marginal seats.</p>
+</div>
 
 <div class="callout">
   <strong>The core thesis:</strong> Fidesz spent 16 years building a constitutional architecture designed to survive an electoral loss. Cardinal laws requiring 2/3 to change, a packed Constitutional Court, a loyal president with veto power until 2029, and a Budget Council that can trigger snap elections. A Tisza government without 133 seats inherits a system engineered to make it fail. The historical pattern is consistent: every change government in post-1990 Hungary, from the first democratic MDF government (replaced by the post-communist socialists in 1994) through the MSZP governments that preceded Fidesz's permanent takeover, has either been a single-term government or collapsed under institutional resistance. The question is not whether Tisza can win on April 12. The question is whether winning without a supermajority is a victory at all.
@@ -1089,6 +1206,402 @@ This is consistent with the base rate (78%), discounted by ~10-15 points for the
 
 </div>
 </div>
+</div><!-- end content-en -->
+
+<div id="content-hu" style="display:none">
+<div class="header-band">
+  <div class="container">
+    <div class="kicker">Választási elemzés / Magyarország 2026</div>
+    <h1>A kétharmados paradoxon: a magyar választás és a Fidesz-restauráció</h1>
+    <div class="subtitle">Miért garantálhatja Orbán rendszerének túlélését, ha a Tisza 133 mandátum nélkül nyer, és mit jelent ez 2030-ra nézve</div>
+    <div class="meta">Enekes Dániel &nbsp;/&nbsp; 2026. április 5. &nbsp;/&nbsp; Választás napja: április 12.</div>
+  </div>
+</div>
+
+<div class="body-content">
+<div class="container">
+
+<p class="lead">A 199 fős Országgyűlésben 133 mandátum szükséges a kétharmados alkotmányos többséghez. Minden független közvélemény-kutató intézet a Tisza előnyét mutatja. De az „előny" nem jelent „dominanciát." A kétharmad nélküli győzelem pedig rosszabb lehet, mint amilyennek hangzik. Ez az elemzés két állítást tesz. Egyrészt: a Tisza esélye a 133 mandátum elérésére mindössze 12-16%-ra tehető. Másrészt, és ami fontosabb: ha nem éri el ezt a küszöböt, 60-70%-os valószínűséggel tér vissza a Fidesz 2030-ra. A kétharmad kérdése nem lábjegyzet. Ez az egész játék tétje.</p>
+
+<div class="update-box">
+  <div class="update-label">Frissítés &nbsp;/&nbsp; 2026. április 8.</div>
+  <h3>A Medián mandátumbecslése átlépte a 133-at</h3>
+  <p>A Medián ma közzétette legfrissebb, ötezer fős aggregált mintán alapuló mandátumbecslését. Az eredmény: <strong>Tisza 138-143, Fidesz 49-55, Mi Hazánk 5-6.</strong> A központi becslés Tisza 141, Fidesz 52. Ez stabil kétharmados Tisza-győzelmet vetít előre. A Medián nem egyszerű országos preferenciát mér, hanem körzetenkénti modellt épített, amely a gerrymanderelt egyéni választókerületek konverziós matematikáját is figyelembe veszi.</p>
+  <p>Az áprilisi 5-i elemzésem 12-16%-ra tette a kétharmad valószínűségét. <strong>Ez a becslés most felfelé revízióra szorul.</strong></p>
+  <table>
+    <thead>
+      <tr><th>Forgatókönyv</th><th>Április 5.</th><th>Április 8. (frissítés)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Tisza kétharmad (133+)</td><td>12-16%</td><td><strong>30-42%</strong></td></tr>
+      <tr><td>Tisza többség, kétharmad nélkül</td><td>55-65%</td><td><strong>40-50%</strong></td></tr>
+      <tr><td>Fidesz megőrzi a többséget</td><td>20-30%</td><td><strong>15-20%</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Külső megerősítés:</strong> A Polymarket előrejelzési piacán a Tisza alkotmányos többségére vonatkozó ár 24% (lényegében változatlan). A „Tisza nyeri a legtöbb mandátumot" piac viszont 72,5%-on áll. A 48 pontos rés azt mutatja, hogy a kereskedők elfogadják a Tisza győzelmét, de szkeptikusak a 133 mandátum elérésével szemben. Az igazság valószínűleg a Medián 50%+ és a Polymarket 24% között van: a saját becslésem most 30-42%.</p>
+  <p style="margin-bottom:0"><strong>Mit változtat ez a fő tézisen?</strong> A 8. és 9. fejezet restaurációs érve <em>feltételes</em>: a 60-70%-os Fidesz-visszatérési valószínűség csak akkor érvényes, ha a Tisza kétharmad nélkül nyer. Ha 141 mandátumot szerez (Medián-forgatókönyv), az alkotmányos architektúra lebontható, és a referenciacsoport-elemzés irrelevánssá válik. Az elemzés strukturális logikája érintetlen, csak annak a valószínűségi tartománynak a súlya csökken, amelyre vonatkozik.</p>
+</div>
+
+<div class="update-box" style="background:#dcfce7;border-color:#16a34a;border-left-color:#16a34a;">
+  <div class="update-label" style="color:#14532d;">Frissítés &nbsp;/&nbsp; 2026. április 12., 15:00</div>
+  <h3 style="color:#14532d;">Rekord részvétel: 66,01% délután 3-kor</h3>
+  <p>A választás napján 15:00-ra a részvétel elérte a 66,01%-ot. Ez 13,26 ponttal magasabb, mint 2022-ben ugyanekkor (52,8%), és már most meghaladta a teljes napos 2002-es rekordot (53,59%). Délelőtti adatok: 9:00-kor 16,89% (2022: 10,31%), 11:00-kor 37,98% (2022: 25,77%), 13:00-kor 54,14% (2022: 40,01%).</p>
+  <p><strong>Végső részvétel előrejelzése (telítési görbe modellel):</strong> A szavazás nem lineáris, hanem regresszív, mint egy víztartály nyomása. A 2022-es és globális (Lengyelország 2023, Törökország 2023) referenciacsoport azt mutatja, hogy a 2 órás ablakok közötti hozam 0,75-0,85 arányban csökken. A front-loading (korai torlódás) itt még erősebb, mint 2022-ben.</p>
+  <table>
+    <thead><tr><th>Forgatókönyv</th><th>Végső részvétel</th><th>Valószínűség</th></tr></thead>
+    <tbody>
+      <tr><td>Enyhe csökkenés</td><td>82-85%</td><td>35%</td></tr>
+      <tr><td>Közepes csökkenés</td><td>80-82%</td><td>30%</td></tr>
+      <tr><td>Erős csökkenés</td><td>78-80%</td><td>15%</td></tr>
+      <tr><td>Nincs csökkenés (lineáris)</td><td>>85%</td><td>15%</td></tr>
+      <tr><td>Súlyos kimerülés</td><td>&lt;78%</td><td>5%</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Várható végső részvétel: 81-84%.</strong> 80%+ valószínűsége: <strong>80%.</strong> Ez 8-11 ponttal meghaladná az 1990 utáni magyar rekordot.</p>
+  <p style="margin-bottom:0"><strong>Hatás a kétharmad valószínűségére:</strong> A magas részvétel strukturálisan a Tiszának kedvez (a marginális szavazók 16 év után a kormány ellen fordulnak). A Medián 141 mandátumos projekciója ~72-74%-os részvételt feltételezett. A 81-84%-os részvétel érdemben felette van ennek. <strong>Frissített kétharmad valószínűség: 45-58%</strong> (április 8-i becslés: 30-42%). A Polymarket valószínűleg az este folyamán igazodik, ahogy az exit poll adatok beérkeznek.</p>
+</div>
+
+<div class="update-box" style="background:#dbeafe;border-color:#1d4ed8;border-left-color:#1d4ed8;">
+  <div class="update-label" style="color:#1e3a8a;">Frissítés &nbsp;/&nbsp; 2026. április 12., 17:00 (NVI hivatalos)</div>
+  <h3 style="color:#1e3a8a;">Döntő a földrajzi részvételi minta: 10 pontos város-vidék szakadék</h3>
+  <p>A Nemzeti Választási Iroda (NVI) 17:00-s hivatalos vármegyei adatai szerint a városi/Tisza-támogató és a vidéki Fidesz-erősségek között 10 pontos, példátlan részvételi különbség alakult ki. Országos részvétel: <strong>74,23% (5 587 935 szavazat).</strong></p>
+  <table>
+    <thead><tr><th>Régió típus</th><th>Vármegyék</th><th>Részvétel</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tisza-hajlamú</strong></td><td>Győr-Moson-Sopron, Vas, Pest, Budapest, Veszprém, Fejér, Zala</td><td>75,59-78,19%</td></tr>
+      <tr><td>Vegyes</td><td>Komárom-Esztergom, Csongrád-Csanád, Heves</td><td>73,08-74,36%</td></tr>
+      <tr><td><strong>Fidesz-erősségek</strong></td><td>BAZ, SZSZB, Nógrád, JNSZ, Hajdú-Bihar</td><td>68,13-71,22%</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Összeomlott a Fidesz keleti védvonala.</strong> BAZ (479 606 jogosult) 68,13%-on és SZSZB (416 208 jogosult) 68,91%-on megközelítőleg 54 000 szavazattal marad el a Fidesz alapbázisából az országos átlaghoz képest. Ezzel szemben Budapest (77,18%) és Pest vármegye (77,58%) együtt ~70 000 szavazattal több urnát produkált Tisza-területen az átlag felett.</p>
+  <p><strong>Becsült listás eredmény (a részvételi összetétel és a Medián demográfiai bontása alapján): Tisza 56-57%, Fidesz 34-35%.</strong> Ez szinte pontosan megfelel a Medián március végi felmérésének, megerősítve a 141 mandátumos projekciót hiteles központi becslésként.</p>
+  <table>
+    <thead><tr><th>Forgatókönyv</th><th>Ápr. 5.</th><th>Ápr. 8.</th><th>Ápr. 12., 15:00</th><th>Ápr. 12., 17:00</th></tr></thead>
+    <tbody>
+      <tr><td>Tisza kétharmad (133+)</td><td>12-16%</td><td>30-42%</td><td>45-58%</td><td><strong>62-75%</strong></td></tr>
+      <tr><td>Tisza többség kétharmad nélkül</td><td>55-65%</td><td>40-50%</td><td>30-40%</td><td><strong>18-25%</strong></td></tr>
+      <tr><td>Fidesz megőrzi a többséget</td><td>20-30%</td><td>15-20%</td><td>10-15%</td><td><strong>5-10%</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Legvalószínűbb mandátumeredmény: Tisza 140-155, Fidesz 40-55, Mi Hazánk 4-6.</strong> A 8. és 9. fejezet restaurációs tézise most nagyjából a valószínűségi tömeg 20-25%-ára vonatkozik, szemben az eredeti tanulmány 55-65%-ával. A valószínűségi tömeg nagy része átkerült abba a forgatókönyvbe, ahol a Tisza le tudja bontani az alkotmányos architektúrát.</p>
+  <p style="margin-bottom:0"><strong>Falszifikációs jelzők ma estére:</strong> Az első budapesti körzetek jellemzően 20:00-20:30 között jelentenek. Ha Budapest 3, Pest 2 és Pest 5 25 pont feletti Tisza-előnyt mutat, a kétharmad megerősített. Ha 15-20 pontra szűkül a különbség, érdemes visszaigazítani éremdobáshoz. A külhoni szavazatokat (történelmileg ~85% Fidesz) április 18-ig számolják, és 1-2 marginális mandátumot billenthetnek.</p>
+</div>
+
+<div class="callout">
+  <strong>A fő tézis:</strong> Egy olyan alkotmányos architektúrát épített a Fidesz 16 éven át, amely a választási vereséget is túléli. Az eszközök: kétharmados többséget igénylő sarkalatos törvények, feltöltött Alkotmánybíróság, 2029-ig vétójoggal rendelkező Fidesz-hű köztársasági elnök, és egy Költségvetési Tanács, amely előrehozott választásokat kezdeményezhet. A 133 mandátum nélküli Tisza-kormány egy olyan rendszert örököl, amelyet a kudarcára terveztek.<br><br>A történelmi minta következetes. Az 1990 utáni Magyarországon minden változást hozó kormány megbukott. Az első demokratikus MDF-kormányt 1994-ben a posztkommunista szocialisták váltották. Az MSZP-kormányok, amelyek a Fidesz állandósult hatalomátvételét megelőzték, egyetlen ciklust sem éltek túl. A minta nem kivétel: szabály.
+</div>
+
+<h2><span class="section-num">01</span>Mit mutatnak a közvélemény-kutatások</h2>
+
+<p>Egy héttel a választás előtt élesen eltérő képet mutatnak a független és a kormányközeli intézetek. Öt független közvélemény-kutató következetesen kétszámjegyű Tisza-előnyt mér a biztos szavazók körében. A kormányközeli Nézőpont Intézet ezzel szemben továbbra is Fidesz-előnyt mutat.</p>
+
+<table>
+  <thead>
+    <tr><th>Kutató</th><th>Tisza</th><th>Fidesz</th><th>Különbség</th><th>Besorolás</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Medián (március vége)</td><td>58%</td><td>35%</td><td style="color:#16a34a;font-weight:700">+23</td><td>Független</td></tr>
+    <tr><td>21 Kutatóközpont (ápr. 1.)</td><td>56%</td><td>37%</td><td style="color:#16a34a;font-weight:700">+19</td><td>Független</td></tr>
+    <tr><td>Závecz Research</td><td>51%</td><td>~38%</td><td style="color:#16a34a;font-weight:700">+13</td><td>Független</td></tr>
+    <tr><td>PolitPro Trend</td><td>48.7%</td><td>40.8%</td><td style="color:#16a34a;font-weight:700">+8</td><td>Aggregátor</td></tr>
+    <tr><td>Nézőpont Intézet</td><td>40%</td><td>46%</td><td style="color:#ea580c;font-weight:700">-6</td><td>Kormányközeli</td></tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  <strong>1. szint ítélete:</strong> Szinte biztosan a Tisza vezet a szavazatokban. A mérték bizonytalan: valószínűleg +8 és +19 pont között. A kétharmadhoz e tartomány felső végére van szükség. Amint e tanulmány megmutatja, a kétharmad elmaradásának következményei messze túlmutatnak egyetlen választási cikluson.
+</div>
+
+<h2><span class="section-num">02</span>A választási rendszer: szavazatokból mandátumok</h2>
+
+<p>Magyarország választási rendszere vegyes, többségi típusú. A Fidesz 2010 után kifejezetten a saját strukturális előnyei érdekében alakította át. A 199 mandátum 106 egyéni választókerületre (győztes mindent visz) és 93 országos listás helyre (módosított arányos, d'Hondt-módszer) oszlik.</p>
+
+<p>Három jellemző hoz létre „konverziós rést" a szavazati arány és a mandátumarány között:</p>
+
+<h3>Gerrymandering (választókerületi manipuláció)</h3>
+<p>A Fidesz 2010 után újrarajzolta mind a 106 választókerület határát. A Political Capital kutatása szerint egyenlő szavazati arány esetén a Fidesz még mindig 58 kerületet nyerne a 48-cal szemben. 2024 végén Budapest választókerületeinek száma 18-ról 16-ra csökkent, míg Pest megyéé 12-ről 14-re nőtt. Független elemzők szerint a Tiszának 3-5 pontos szavazati előnyre van szüksége pusztán a mandátumparitáshoz.</p>
+
+<h3>Győzteskompenzáció</h3>
+<p>A többletszavazatok (a győzelmi többlet mínusz egy) a győztes párt országos listájára kerülnek. 2022-ben a Fidesz a szavazatok 53%-át a mandátumok 68%-ára váltotta (135/199).</p>
+
+<h3>Diaszpóra-szavazatok</h3>
+<p>Rekordszámú, 497 000 külföldi magyar regisztrált 2026-ra. Történelmileg 80-86%-uk a Fideszre szavaz. Ez ~250 000 szavazatot ad a Fidesz országos listájához.</p>
+
+<h2><span class="section-num">03</span>Mandátumbecslések</h2>
+
+<p>A rendelkezésre álló mandátumbecslési modellek drámaian eltérőek:</p>
+
+<div class="bar-chart">
+  <div style="font-size:13px;font-weight:600;color:#666;margin-bottom:14px;font-family:'JetBrains Mono',monospace">TISZA BECSÜLT MANDÁTUMAI (133 kell a 2/3-hoz)</div>
+  <div class="bar-row">
+    <div class="bar-label">Polymarket (felső)</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:66.3%">132</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">21 Kutatóközpont</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:64.8%">129</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">PolitPro</div>
+    <div class="bar-track"><div class="bar-fill bar-tisza" style="width:51.3%">102</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Nézőpont</div>
+    <div class="bar-track"><div class="bar-fill bar-fidesz" style="width:40.2%">80</div></div>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>Kritikus megállapítás:</strong> Még a legoptimistább független előrejelzés sem éri el a 133-at (21 Kutatóközpont: 129, Polymarket: 132). A kétharmadhoz minden létező modellt felül kellene teljesíteni. Az 1-4 mandátumos rés nem statisztikai érdekesség. A 8. és 9. fejezet bemutatja, miért. E rés az a különbség egy olyan kormány között, amely az intézményeket átalakíthatja, és egy olyan között, amely az elődje által tervezett alkotmányos ketrecben kénytelen kormányozni.
+</div>
+
+<h2><span class="section-num">04</span>Mi szükséges: hat feltétel</h2>
+
+<p>Ahhoz, hogy a Tisza elérje a 133 mandátumot, az alábbi feltételek mindegyikének egyidejűleg teljesülnie kell:</p>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>1. feltétel: 15+ pontos szavazati előny</h4>
+      <span class="prob-badge prob-mid">35-45%</span>
+    </div>
+    <p>A Tiszának 52-55%-ra van szüksége 37-40%-kal szemben az összes szavazó körében. 20-26% bizonytalan szavazó hatalmas teret ad a szűkülésre.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>2. feltétel: 70+ kerület megnyerése a 106-ból</h4>
+      <span class="prob-badge prob-low">20-30%</span>
+    </div>
+    <p>2022-ben az egységes ellenzék mindössze 18-at nyert a 106 kerületből. A Tiszának 50+ győzelemre lenne szüksége Budapesten kívül, kétéves hálózatával a Fidesz 16 éves vidéki beágyazottsága ellen.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>3. feltétel: Mi Hazánk 5% felett marad</h4>
+      <span class="prob-badge prob-mid">~60%</span>
+    </div>
+    <p>A szélsőjobboldali párt 5-6%-on áll. Ha bejut, megosztja a jobboldali szavazatokat. Ha 5% alá kerül, a Fidesz profitál a listás mandátumelosztás során.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>4. feltétel: Részvétel meghaladja a 72%-ot</h4>
+      <span class="prob-badge prob-mid">~50%</span>
+    </div>
+    <p>Magyarországon 2014 óta 61-70% közötti volt a részvétel. A magasabb részvétel Fidesz-ellenes alkalmi szavazókat hoz. 72%+ 1990 utáni rekord lenne.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>5. feltétel: Nincs szisztematikus közvélemény-kutatási hiba</h4>
+      <span class="prob-badge prob-mid">~50%</span>
+    </div>
+    <p>2022-ben a független közvélemény-kutatások szoros versenyt mutattak. A Fidesz 5-8 ponttal felülmúlta őket. Ha hasonló hiba létezik 2026-ban, a valós különbség 10+ ponttal kisebb lehet.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>6. feltétel: Tisztességes szavazatszámlálás</h4>
+      <span class="prob-badge prob-high">~85%</span>
+    </div>
+    <p>A nemzetközi megfigyelők „szabadnak, de nem tisztességesnek" értékelik Magyarország választásait. A fizikai szavazatmanipuláció valószínűtlen.</p>
+  </div>
+</div>
+
+<h2><span class="section-num">05</span>Valószínűségi becslés: Monte Carlo szimuláció</h2>
+
+<p>A szubjektív pontbecslések szorzása helyett (ami hamis pontosságot eredményez) közvetlenül a bizonytalanságot modellezzük. A szimuláció valószínűségi eloszlásokból vesz mintát, szavazatokat mandátumokká alakít a magyar választási mechanizmusokra kalibrált modellel, és 10 000 iterációt futtat.</p>
+
+<div class="callout">
+  <strong>Kalibrációs ellenőrzés:</strong> A 2022-es tényleges bemeneti adatokkal (Fidesz 54%, ellenzék 34%, Mi Hazánk 6%) a modell az ellenzéki mandátumok számára 52-60 körül ad eredményt, összhangban a tényleges 56-tal. A modell reprodukálja az ismert eredményeket, mielőtt ismeretlen eredményeket vetítene előre.
+</div>
+
+<div class="probability-box">
+  <div class="big-number">12-16%</div>
+  <div class="label">A Tisza kétharmados többségének becsült valószínűsége</div>
+</div>
+
+<h2><span class="section-num">06</span>Mit mondanak a predikciós piacok</h2>
+
+<table>
+  <thead>
+    <tr><th>Piac (Polymarket, ápr. 4-5.)</th><th>Ár</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tisza alkotmányos többséget nyer (133+)</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">26%</td></tr>
+    <tr><td>Tisza nyeri a legtöbb mandátumot</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">68-70%</td></tr>
+    <tr><td>Magyar Péter lesz a miniszterelnök</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">66%</td></tr>
+    <tr><td>Tisza szavazati előnye 9%+</td><td style="font-weight:700;font-family:'JetBrains Mono',monospace">39.5%</td></tr>
+  </tbody>
+</table>
+
+<p>A „nyer" (70%) és a „kétharmad" (26%) közötti különbség tökéletesen megragadja a konverziós problémát. Magyarország rendszere lehetővé teszi, hogy erős előnnyel többséget nyerjen egy párt, de a kétharmadhoz elsöprő, országos szinten egyenletesen eloszló hullámra van szükség.</p>
+
+<h2><span class="section-num">07</span>Az én értékelésem</h2>
+
+<p>A 12-16%-os becslésem érdemben alacsonyabb a Polymarket 26%-ánál. Három ok:</p>
+
+<p><strong>A konverziós matematika kegyetlen.</strong> Még +19 pontos országos előnnyel is rendkívül megnehezíti 70+ kerület megnyerését a gerrymanderelt vidéki kerületek aritmetikája, különösen egy helyi infrastruktúra nélküli párt számára.</p>
+
+<p><strong>A bizonytalan szavazók lefelé mutató kockázatot jelentenek.</strong> 20-26% bizonytalan szavazó egy héttel a választás előtt. A magyar bizonytalan szavazók történelmileg enyhén a kormányzó pártot részesítették előnyben.</p>
+
+<p><strong>A 2022-es precedens kísérti az elemzést.</strong> A közvélemény-kutatások szoros versenyt mutattak. A Fidesz 20 ponttal nyert.</p>
+
+<p>De még 12-16%-nál is a kétharmad kérdése több elemzést igényel. Az igazi kérdés: <em>mi történik a 84-88%-nyi forgatókönyvben, ahol a Tisza nem éri el a kétharmadot?</em> A válasz egyértelmű. A Fidesz alkotmányos architektúrája a tervek szerint aktiválódik. Az új kormányt bezárja egy ketrecbe, amelyből nem tud kiszabadulni. A Fidesz 2030-as restaurációjának valószínűsége ebben az esetben 60-70%.</p>
+
+<div class="takeaway">
+  <h3>Legvalószínűbb kimenetel</h3>
+  <p>A Tisza <strong>100-125 mandátumot</strong> nyer. Erős többség. Magyar Péter miniszterelnök lesz. Alkotmányos kétharmad azonban nincs.</p>
+  <p>Orbán alkotmányos architektúrája érintetlen marad. A Fidesz-kori Alaptörvény, a sarkalatos törvények és a feltöltött intézmények mind túlélik.</p>
+  <p style="margin-bottom:0"><strong>A következmények azonban túlmutatnak ezen. A következő fejezetek azt mutatják be, hogy az egyszerű többség kétharmad nélkül 60-70%-os valószínűséggel vezet a Fidesz 2030-as visszatéréséhez.</strong></p>
+</div>
+
+<h2><span class="section-num">08</span>Ha nem 133: a Fidesz-restauráció</h2>
+
+<p>Az április 12-i választás legvalószínűbb kimenetele a Tisza többsége kétharmad nélkül. Ez óriási horderejű kérdést vet fel. <strong>Össze tud-e tartani a Tisza elég sokáig a hatékony kormányzáshoz? Vagy a Fidesz által épített strukturális csapdák szétszakítják, megnyitva az utat a 2030-as visszatéréshez?</strong></p>
+
+<h3>Orbán alkotmányos börtöne</h3>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Sarkalatos törvények (2/3 a változtatáshoz)</h4>
+      <span class="prob-badge prob-low">Zárt</span>
+    </div>
+    <p>Az igazságszolgáltatás, a médiaszabályozás, a választási rendszer, az államháztartás, a családpolitika, az egyházi kapcsolatok, a nyugdíjrendszer és az adózás mind sarkalatos törvényekkel szabályozott, amelyek módosításához kétharmados többség szükséges.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Feltöltött Alkotmánybíróság</h4>
+      <span class="prob-badge prob-low">15/15 Fidesz</span>
+    </div>
+    <p>Mind a 15 alkotmánybírót a Fidesz nevezte ki. Bármely jogszabályt megsemmisíthetnek, amely a Fidesz-kori Alaptörvénnyel ellentétes.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Fidesz-hű köztársasági elnök (2029-ig)</h4>
+      <span class="prob-badge prob-low">Vétójog</span>
+    </div>
+    <p>Sulyok Tamás, a Fideszhez közeli elnök 2029-ig marad hivatalban. Törvényeket küldhet az AB-nek, megtagadhatja a bírói kinevezéseket, és előrehozott választásokat írhat ki, ha a kormány a költségvetést nem fogadtatja el.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Költségvetési Tanács</h4>
+      <span class="prob-badge prob-low">Vétójog</span>
+    </div>
+    <p>A Költségvetési Tanács megvétózhat bármely költségvetést, amely az államadósságot növeli. Tagjait a Fidesz nevezte ki 6-12 éves mandátumra. Ha megvétózzák a költségvetést, az elnök feloszlathatja a parlamentet. Ez a Tisza-kormány „vészleállító gombja."</p>
+  </div>
+</div>
+
+<h3>Össze tud-e tartani a Tisza?</h3>
+
+<div class="condition-grid">
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Egyszemélyes párt</h4>
+      <span class="prob-badge prob-low">Magas kockázat</span>
+    </div>
+    <p>A Tisza gyakorlatilag egyenlő Magyar Péterrel. A pártnak nincs másodvonalbeli vezetése önálló közismertséggel. Ha Magyar megbotlik, nincs utódlási terv.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Ideológiailag inkoherens szavazóbázis</h4>
+      <span class="prob-badge prob-mid">Közepes kockázat</span>
+    </div>
+    <p>A Tisza szavazóbázisa alkalmi koalíció: volt Fidesz-szavazók, volt baloldali liberálisok és első szavazók, akiket nem a közös jövőkép, hanem az Orbán-ellenesség tart össze. Amint Orbán ellenzékben lesz, a ragasztó feloldódik.</p>
+  </div>
+  <div class="condition-card">
+    <div class="cond-header">
+      <h4>Nulla kormányzási tapasztalat</h4>
+      <span class="prob-badge prob-low">Magas kockázat</span>
+    </div>
+    <p>A Tisza soha nem kormányzott semmit. Az első választását (EP 2024) alig két éve tartották. A 106 parlamenti jelöltjének többsége soha nem töltött be közszolgálati tisztséget.</p>
+  </div>
+</div>
+
+<h2><span class="section-num">09</span>Rekurzív valószínűség: Fidesz-restauráció 2030-ra</h2>
+
+<h3>Referenciacsoport-előrejelzés: mi történt máshol?</h3>
+
+<p>A szubjektív valószínűségek szorzása helyett egy megalapozottabb kérdést tehetünk fel: <em>hasonló helyzetekben világszerte milyen gyakran tért vissza a régi rezsim?</em></p>
+
+<table>
+  <thead>
+    <tr><th>Eset</th><th>Forgatókönyv</th><th>Kimenetel</th><th>Régi rezsim visszatért?</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Magyarország 1990-1994</strong></td>
+      <td>Az MDF nyeri az első szabad választást. Antall/Boross küzd a gazdasági átalakulással.</td>
+      <td>Az MSZP (posztkommunista szocialisták) 54%-kal visszatér Horn alatt 1994-ben.</td>
+      <td style="color:#c23616;font-weight:700">Régi rezsim visszatér (4 év)</td>
+    </tr>
+    <tr>
+      <td><strong>Magyarország 2002-2010</strong></td>
+      <td>Az MSZP nyer, két ciklust kormányoz. Az öszödi beszéd válsága.</td>
+      <td>A Fidesz kétharmaddal nyer 2010-ben.</td>
+      <td style="color:#c23616;font-weight:700">Igen (8 év)</td>
+    </tr>
+    <tr>
+      <td><strong>Lengyelország 2007-2015</strong></td>
+      <td>Tusk (PO) nyer a PiS első ciklusa után. Nem tudja reformálni a PiS-intézményeket.</td>
+      <td>A PiS 2015-ben abszolút többséggel nyer.</td>
+      <td style="color:#c23616;font-weight:700">Igen (8 év)</td>
+    </tr>
+    <tr>
+      <td><strong>Izrael 2021-2022</strong></td>
+      <td>Bennett/Lapid koalíció legyőzi Netanjahut. 8 párt, ideológiailag inkoherens.</td>
+      <td>A koalíció 18 hónap alatt összeomlik. Netanjahu visszatér.</td>
+      <td style="color:#c23616;font-weight:700">Igen (1,5 év)</td>
+    </tr>
+    <tr>
+      <td><strong>Szlovákia 2020-2023</strong></td>
+      <td>Matovič/Heger legyőzi Fico Smer-jét. Belső megosztottság.</td>
+      <td>Fico 2023-ban koalíciós többséggel visszatér.</td>
+      <td style="color:#c23616;font-weight:700">Igen (3 év)</td>
+    </tr>
+    <tr>
+      <td><strong>Argentína 2015-2019</strong></td>
+      <td>Macri legyőzi a peronistákat. Peronista tartományok, bíróságok szemben állnak vele.</td>
+      <td>A peronisták 2019-ben visszatérnek.</td>
+      <td style="color:#c23616;font-weight:700">Igen (4 év)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>9 összehasonlítható esetből 7 eredményezte a régi rezsim visszatérését egy-két választási cikluson belül.</strong></p>
+
+<div class="formula">
+<strong>Referenciacsoport alapráta:</strong> 7/9 eset = <strong>78% restauráció két választási cikluson belül</strong><br><br>
+<strong>Korrigált becslés Magyarország-specifikus tényezőkkel:</strong> <strong>60-70%</strong><br>
+Ez konzisztens az alaprátával (78%), 10-15 ponttal csökkentve az EU támogatási és a kormányzó párt fáradtsági tényezőkért.
+</div>
+
+<div class="probability-box">
+  <div class="big-number">60-70%</div>
+  <div class="label">A Fidesz hatalomba való visszatérésének valószínűsége 2030-ra</div>
+  <p style="color:#999;font-size:14px;margin-top:12px;margin-bottom:0">(Feltételes arra, hogy a Tisza 2026-ban kétharmad nélkül nyer)</p>
+</div>
+
+<div class="takeaway">
+  <h3>A restaurációs tézis</h3>
+  <p>Ha a Tisza kétharmad nélkül nyer, a legvalószínűbb négyéves pálya: <strong>kezdeti lelkesedés, intézményi ellenállás, teljesítési kudarc, szavazói kiábrándultság, Fidesz-visszatérés.</strong> E ciklus 2030-ig 60-70%-os valószínűséggel zárul le.</p>
+  <p>Egyetlen kitörési pont létezik: ha a Tisza jogi mechanizmust talál a sarkalatos törvények felülbírálatára. A legvalószínűbb eszköz az EU-jog elsőbbségének hivatkozása (EUSZ 2. cikk), az úgynevezett „Scheppele-doktrína," amelyet a princetoni Kim Lane Scheppele javasolt. Jogilag plauzibilis, politikailag robbanékony. Még soha egyetlen kormány sem próbálta meg.</p>
+  <p>A kétharmad nélkül a Tisza legjobb reális útja az, hogy elég kompetensen kormányoz ahhoz, hogy 2030-ra a 133 mandátumra felépítse az érvet. De ugyanazok az intézményi csapdák, amelyek a reformot megakadályozzák, azokat a látható eredményeket is lehetetlenné teszik, amelyek az újraválasztást indokolnák. Ez a magyar demokratikus átmenet paradoxona: a rendszert úgy tervezték, hogy csak az a párt tudja hatékonyan működtetni, amelyik megépítette.</p>
+  <p style="margin-bottom:0"><strong>A 2026-os választás eldöntheti, ki kormányoz négy évig. De azt, hogy Magyarország demokratikus architektúrája ténylegesen megváltozhat-e, csak a kétharmad kérdése dönti el.</strong></p>
+</div>
+
+<div class="sources">
+  <h2>Források</h2>
+  <p><strong>Közvélemény-kutatás:</strong> Medián, 21 Kutatóközpont, Závecz Research, PolitPro, Nézőpont Intézet</p>
+  <p><strong>Mandátumbecslések:</strong> 21 Kutatóközpont mandátumkalkulátora, Nézőpont mandátumbecslés (Magyar Nemzet), PolitPro modell</p>
+  <p><strong>Predikciós piacok:</strong> Polymarket (alkotmányos többség, mandátumszám, szavazati különbség)</p>
+  <p><strong>Választási rendszer:</strong> Centre for European Reform, Political Capital (Budapest), Navarrai Egyetem, Journal of Democracy, Public Choice (Springer)</p>
+  <p><strong>Alkotmányos elemzés:</strong> Kim Lane Scheppele (Verfassungsblog / Princeton), CSIS, Review of Democracy (CEU), ISPI, BISI</p>
+  <p><strong>Demokratikus értékelések:</strong> OSCE/ODIHR, Bertelsmann BTI 2024, V-Dem, Human Rights Watch, Politico Europe, ARENA (Oslói Egyetem)</p>
+  <p style="margin-top:20px;font-style:italic">Készült: 2026. április 5. Egy héttel a magyar választások előtt.</p>
+</div>
+
+</div>
+</div>
+
+</div><!-- end content-hu -->
 
 <footer style="background:#1a1a2e;color:#b0aead;padding:40px 0;margin-top:60px;text-align:center;font-family:'Source Sans 3',sans-serif;">
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
